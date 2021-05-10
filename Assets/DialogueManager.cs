@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
     // TEXT BOXES
-    public Text bottomText;
-    public Text topLeftText;
-    public Text midLeftText;
-    public Text topRightText;
-    public Text midRightText;
+    TextMeshProUGUI bottomText;
+    TextMeshProUGUI topLeftText;
+    TextMeshProUGUI midLeftText;
+    TextMeshProUGUI topRightText;
+    TextMeshProUGUI midRightText;
 
     // DIALOGUE
     // Dialogue for safe areas that is essential for the player to see 
@@ -36,7 +37,11 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        bottomText = GameObject.Find("Text_Bottom").GetComponent<TextMeshProUGUI>();
+        topLeftText = GameObject.Find("Text_TopLeft").GetComponent<TextMeshProUGUI>();
+        midLeftText = GameObject.Find("Text_MidLeft").GetComponent<TextMeshProUGUI>();
+        topRightText = GameObject.Find("Text_TopRight").GetComponent<TextMeshProUGUI>();
+        midRightText = GameObject.Find("Text_MidRight").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -45,7 +50,7 @@ public class DialogueManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             int textToChange = Random.Range(0, 5);
-            Text currentTextBox = bottomText;
+            TextMeshProUGUI currentTextBox = bottomText;
             switch(textToChange)
             {
                 case 0: // Bottom
@@ -68,9 +73,18 @@ public class DialogueManager : MonoBehaviour
             RandomizePosition(currentTextBox, textToChange);
             DisplayText(currentTextBox, "Nyeheheh");
         }
+
+        if(isSafe)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
-    void RandomizePosition(Text textBox, int textBoxID)
+    void RandomizePosition(TextMeshProUGUI textBox, int textBoxID)
     {
         switch(textBoxID)
         {
@@ -99,8 +113,8 @@ public class DialogueManager : MonoBehaviour
                 maxPosY = -100;
                 break;
             case 4: // MidRight
-                minPosX = -1500;
-                maxPosX = -1200;
+                minPosX = -1200;
+                maxPosX = -900;
                 minPosY = -500;
                 maxPosY = 0;
                 break;
@@ -111,7 +125,7 @@ public class DialogueManager : MonoBehaviour
         textBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(posX, posY, 0);
     }
 
-    void DisplayText(Text textBox, string dialogue)
+    void DisplayText(TextMeshProUGUI textBox, string dialogue)
     {
         textBox.text = dialogue;
     }
