@@ -31,8 +31,6 @@ public class SC_FPSController : MonoBehaviour
     }
 
     void Update() {
-        if (warmup > 10)
-        {
             // We are grounded, so recalculate move direction based on axes
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
@@ -71,12 +69,6 @@ public class SC_FPSController : MonoBehaviour
                 playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                 transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
             }
-        }
-        else
-        {
-            warmup++;
-        }
-        
     }
 
     
