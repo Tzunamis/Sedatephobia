@@ -136,7 +136,6 @@ public class DialogueManager : MonoBehaviour
 
         // Randomize dialogue
         int dialogueIndex = Random.Range(1, intrusiveThoughts.Count + 1);
-        Debug.Log("Count: " + intrusiveThoughts.Count + ". Index: " + dialogueIndex);
         currentDialogue = (string)intrusiveThoughts[dialogueIndex - 1];
         // Remove selected dialogue
         intrusiveThoughts.RemoveAt(dialogueIndex - 1);
