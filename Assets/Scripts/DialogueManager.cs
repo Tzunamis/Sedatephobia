@@ -50,13 +50,8 @@ public class DialogueManager : MonoBehaviour
         topRightText = GameObject.Find("Text_TopRight").GetComponent<TextMeshProUGUI>();
         midRightText = GameObject.Find("Text_MidRight").GetComponent<TextMeshProUGUI>();
 
-        // BUILD INTRUSIVE THOUGHTS BANK
-        intrusiveThoughtsBank = new string[5];
-        intrusiveThoughtsBank[0] = "string1";
-        intrusiveThoughtsBank[1] = "string2";
-        intrusiveThoughtsBank[2] = "string3";
-        intrusiveThoughtsBank[3] = "string4";
-        intrusiveThoughtsBank[4] = "string5";
+        // Build intrusive thoughts bank
+        BuildIntrusiveThoughtsBank();
 
         // Fill intrusive thoughts arraylist
         RefreshIntrusiveThoughts();
@@ -140,7 +135,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Randomize dialogue
-        int dialogueIndex = Random.Range(1, intrusiveThoughts.Count);
+        int dialogueIndex = Random.Range(1, intrusiveThoughts.Count + 1);
         Debug.Log("Count: " + intrusiveThoughts.Count + ". Index: " + dialogueIndex);
         currentDialogue = (string)intrusiveThoughts[dialogueIndex - 1];
         // Remove selected dialogue
@@ -220,6 +215,16 @@ public class DialogueManager : MonoBehaviour
         isSafe = false;
 
         // TRIGGER DARKNESS AUDIO
+    }
+
+    void BuildIntrusiveThoughtsBank()
+    {
+        intrusiveThoughtsBank = new string[5];
+        intrusiveThoughtsBank[0] = "You're worthless";
+        intrusiveThoughtsBank[1] = "Nobody likes you";
+        intrusiveThoughtsBank[2] = "Jump off a bridge";
+        intrusiveThoughtsBank[3] = "Stupid piece of shit";
+        intrusiveThoughtsBank[4] = "Ur mom gay";
     }
 
     void RefreshIntrusiveThoughts()
