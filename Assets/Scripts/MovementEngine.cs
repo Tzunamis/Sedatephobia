@@ -14,7 +14,6 @@ public class MovementEngine : MonoBehaviour
     GameObject Camera;
     CharacterController Controller;
     public float MoveSpeed;
-    float velocity;
     float StartHeight;
     void Start()
     {
@@ -23,9 +22,8 @@ public class MovementEngine : MonoBehaviour
         Cursor.visible = false;
         Camera = GameObject.Find("Camera");
         Controller = GetComponent<CharacterController>();
+        Invoke("MakeControllable", 1); // The editor is a bit buggy on startup with mouse controls, this shouldn't be needed in a build.
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (controllable)
@@ -43,5 +41,20 @@ public class MovementEngine : MonoBehaviour
             Controller.Move((Camera.transform.right * Xvel + Camera.transform.forward * Yvel));
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, StartHeight, gameObject.transform.position.z);
         }
+    }
+
+    void MakeControllable()
+    {
+        controllable = true;
+    }
+    public void MakeOutSideControllable()
+    {
+        Invoke("MakeControllable", 0.2f);
+    }
+
+    public void OutsideSync()
+    {
+        yRot = Camera.transform.eulerAngles.x;
+        xRot = Camera.transform.eulerAngles.y;
     }
 }

@@ -683,7 +683,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1575134927}
   m_Father: {fileID: 959867608}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2111,7 +2112,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693612902}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -3107,7 +3108,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959867607}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7c397ad8faeee7143b7ba833c1f0aba5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -5152,8 +5153,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2004357527}
-  m_RootOrder: 1
+  m_Father: {fileID: 145080754}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1575134928
 ParticleSystemRenderer:
@@ -11504,6 +11505,7 @@ GameObject:
   - component: {fileID: 2004357527}
   - component: {fileID: 2004357526}
   - component: {fileID: 2004357528}
+  - component: {fileID: 2004357529}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11537,11 +11539,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004357525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.14, z: -84.74}
+  m_LocalPosition: {x: 30, y: 1.2, z: 729.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 959867608}
-  - {fileID: 1575134927}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11557,10 +11558,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820a01689edcfab4a9369491660ed228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllable: 1
+  controllable: 0
   hScrollSpeed: 15
   vScrollSpeed: 15
   MoveSpeed: 0.02
+--- !u!114 &2004357529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004357525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb4c9d024bdfbc46b335a5c703e3586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WarpPositions: []
 --- !u!1 &2028593590
 GameObject:
   m_ObjectHideFlags: 0

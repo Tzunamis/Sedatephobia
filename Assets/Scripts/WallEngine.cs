@@ -5,50 +5,45 @@ using UnityEngine;
 public class WallEngine : MonoBehaviour
 {
     ParticleSystem Particle;
-    int shuttick;
-    bool shutdown;
     GameObject Player;
+    GameObject Camera;
     void Start()
     {
         Particle = GameObject.Find("DustSystem").GetComponent<ParticleSystem>();
+        Camera = GameObject.Find("Camera");
+        Player = GameObject.Find("Player");
     }
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
-            //collider.gameObject.GetComponent<SC_FPSController>().enabled = false;
-            Player = collider.gameObject;
-            shutdown = true;
+            Debug.Log("Player Hit Outside Wall");
+            NoPlayingAllowed();
+            GoWhereWeWantYou();
+            OkayYouCanPlay();
         }
             
     }
-    void Update()
+    void NoPlayingAllowed()
     {
-        if (shutdown)
-        {
-            if (shuttick == 2)
-            {
-                Debug.Log("Port Time");
-               // Player.gameObject.GetComponent<SC_FPSController>().enabled = false;
-                var main = Particle.main;
-                main.simulationSpace = ParticleSystemSimulationSpace.Local;
-                Player.gameObject.transform.position = StaticSave.Position1;
-                GameObject.Find("Camera").gameObject.transform.eulerAngles = StaticSave.RotateZero;
-                Player.gameObject.transform.eulerAngles = StaticSave.RotateZero;
-                shuttick++;
-                
-            }
-            if (shuttick >= 5)
-            {
-                var main = Particle.main;
-               // Player.GetComponent<SC_FPSController>().enabled = true;
-                main.simulationSpace = ParticleSystemSimulationSpace.World;
-                shutdown = false;
-            }
-            else
-            {
-                shuttick++;
-            }
-        }
-    } 
+        var main = Particle.main; // I dunno why i need this, the legacy system was way less cringe.
+        main.simulationSpace = ParticleSystemSimulationSpace.Local; // Ties all particles to the player so they get ported with them.
+        Player.GetComponent<MovementEngine>().controllable = false; // Keeps the movement script from rustling my jimmies
+    }
+    void GoWhereWeWantYou()
+    {
+        Camera.transform.eulerAngles = new Vector3(Camera.transform.eulerAngles.x, 0, Camera.transform.eulerAngles.z); // Makes the player face the way we want, (hopefully without them noticing)
+        WarpTime();// Decides the player's fate based on "InRoom", which we'll change when they reach the center properly;        
+    }
+    void OkayYouCanPlay()
+    {
+        var main = Particle.main; // Still kinda cringe.
+        main.simulationSpace = ParticleSystemSimulationSpace.World; // Lets the player move through particles again.
+        Player.GetComponent<MovementEngine>().OutsideSync();
+        Player.GetComponent<MovementEngine>().MakeOutSideControllable();
+    }
+    void WarpTime()
+    {
+        Player.transform.position = Player.GetComponent<StaticSave>().WarpPositions[StaticSave.InRoom];
+    }
 }
