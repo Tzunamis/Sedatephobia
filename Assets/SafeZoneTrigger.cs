@@ -27,13 +27,21 @@ public class SafeZoneTrigger : MonoBehaviour
     {
         if(col.tag == "Player")
         {
-            //stop darkness sounds
+            // AUDIO
+            // stop darkness sounds
             sound.Play();
+
             if(!playerHasEntered)
             {
+                // GAME STATE
                 playerHasEntered = true;
                 StaticSave.InRoom++;
+                // DIALOGUE
+                DialogueManager dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+                Debug.Log("Entered Room" + StaticSave.InRoom);
+                dialogueManager.EnterSafeZone(StaticSave.InRoom);
             }
+
         }
     }
 

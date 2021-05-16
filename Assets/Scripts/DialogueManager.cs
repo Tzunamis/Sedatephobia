@@ -16,8 +16,17 @@ public class DialogueManager : MonoBehaviour
     TextMeshProUGUI currentTextBox;
 
     // DIALOGUE
+
+    Dialogue currentNarrativeDialogue; // Current narrative dialogue
+    int currentNarrativeDialogueID;
+    bool firstNarrativeLine;
+    string currentIntrusiveDialogue; // Intrusive dialogue to be printed
+    int dialogueLocation; // Location of intrusive thought
+    int previousDialogueLocation; // Tracks location of previous intrusive thought
+    public float fadeTime; // Duration of text fade
+
     // Dialogue for safe areas that is essential for the player to see 
-    string[] narrativeDialogue;
+    public Dialogue[] narrativeDialogueBank;
     // Dialogue for darkness, which will likely be randomized
     string[] groundedThoughtsBank; // "Grounded" thoughts that appear on the bottom of the screen
     string[] intrusiveThoughtsBank; // "Intrusive" thoughts that appear all over the screen
@@ -29,14 +38,13 @@ public class DialogueManager : MonoBehaviour
     int minPosY = 0;
     int maxPosY = 0;
 
-    string currentDialogue; // Dialogue to be printed
-    int dialogueLocation; // Location of intrusive thought
-    int previousDialogueLocation; // Tracks location of previous intrusive thought
+    
 
     // PLAYER STATUS
     // These will be tracked using trigger zones
     bool isSafe = true; // Tracks whether player is in a safe zone or in darkness
-    int safeZoneID = 0; // Tracks which location the player is in (or last visited)
+    [HideInInspector]
+    public int safeZoneID = 0; // Tracks which location the player is in (or last visited)
     float safeZoneTimer = 0; // Tracks time since player entered current safezone
     float darknessTimer = 0; // Tracks time since player entered darkness
 
@@ -49,6 +57,8 @@ public class DialogueManager : MonoBehaviour
         midLeftText = GameObject.Find("Text_MidLeft").GetComponent<TextMeshProUGUI>();
         topRightText = GameObject.Find("Text_TopRight").GetComponent<TextMeshProUGUI>();
         midRightText = GameObject.Find("Text_MidRight").GetComponent<TextMeshProUGUI>();
+        currentNarrativeDialogue = narrativeDialogueBank[0];
+        currentNarrativeDialogueID = 0;
 
         // Build intrusive thoughts bank
         BuildIntrusiveThoughtsBank();
@@ -66,44 +76,14 @@ public class DialogueManager : MonoBehaviour
         {
             DisplayIntrusiveThought();
         }
-        
 
         if (isSafe)
         {
-            switch(safeZoneID)
-            {
-                case 0:
-                    // STARTING ROOM DIALOGUE
-                    break;
-                case 1:
-                    // ROOM 1 DIALOGUE
-                    break;
-                case 2:
-                    // ROOM 2 DIALOGUE
-                    break;
-                case 3:
-                    // ROOM 3 DIALOGUE
-                    break;
-                case 4:
-                    // ROOM 4 DIALOGUE
-                    break;
-                case 5:
-                    // ROOM 5 DIALOGUE
-                    break;
-                case 6:
-                    // ROOM 6 DIALOGUE
-                    break;
-                case 7:
-                    // CABIN DIALOGUE
-                    break;
-            }
-
-            safeZoneTimer += Time.deltaTime;
+            // Any general purpose safe zone stuff?
         }
 
         else
         {
-
             darknessTimer += Time.deltaTime;
         }
     }
@@ -136,7 +116,7 @@ public class DialogueManager : MonoBehaviour
 
         // Randomize dialogue
         int dialogueIndex = Random.Range(1, intrusiveThoughts.Count + 1);
-        currentDialogue = (string)intrusiveThoughts[dialogueIndex - 1];
+        currentIntrusiveDialogue = (string)intrusiveThoughts[dialogueIndex - 1];
         // Remove selected dialogue
         intrusiveThoughts.RemoveAt(dialogueIndex - 1);
 
@@ -147,7 +127,7 @@ public class DialogueManager : MonoBehaviour
         }
         // Display dialogue
         RandomizeTextPosition(currentTextBox, dialogueLocation);
-        DisplayText(currentTextBox, currentDialogue);
+        DisplayIntrusiveDialogue(currentTextBox, currentIntrusiveDialogue, 3, true);
     }
 
     void RandomizeTextPosition(TextMeshProUGUI textBox, int textBoxID)
@@ -190,22 +170,63 @@ public class DialogueManager : MonoBehaviour
         textBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(posX, posY, 0);
     }
 
-    void DisplayText(TextMeshProUGUI textBox, string dialogue)
+    void DisplayIntrusiveDialogue(TextMeshProUGUI textBox, string dialogue, float duration, bool fadeIn)
     {
         textBox.text = dialogue;
+        StartCoroutine(FadeText(textBox, true));
     }
 
-    void EnterSafeZone(int safeZone)
+    IEnumerator FadeText(TextMeshProUGUI textBox, bool fadeIn)
+    {
+        if(fadeIn)
+        {
+            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0);
+            while (textBox.color.a < 1.0f)
+            {
+                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a + (Time.deltaTime / fadeTime));
+                yield return null;
+            }
+        }
+        else
+        {
+            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 1);
+            while (textBox.color.a > 0.0f)
+            {
+                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a - (Time.deltaTime / fadeTime));
+                yield return null;
+            }
+        }
+    }
+
+    void DisplayNarrativeDialogue()
+    {
+        bottomText.text = currentNarrativeDialogue.text;
+        StartCoroutine(FadeText(bottomText, true));
+        currentNarrativeDialogueID++;
+        currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID];
+        if(currentNarrativeDialogue.safeZoneID == safeZoneID)
+        {
+            Invoke("DisplayNarrativeDialogue", currentNarrativeDialogue.duration);
+        }
+    }
+
+    IEnumerator NextNarrativeDialogue(TextMeshProUGUI textBox, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        
+        
+    }
+
+    public void EnterSafeZone(int safeZone)
     {
         if(safeZone != safeZoneID) // If the player has entered a new safe zone
         {
-            safeZoneTimer = 0; // Reset timer to allow for new dialogue
+            isSafe = true; // Player is safe
             safeZoneID = safeZone; // Set new safezone
+            // Trigger first dialogue of area
+            DisplayNarrativeDialogue();
         }
-        
-        isSafe = true;
-
-        // TRIGGER SAFEZONE AUDIO
+               
     }
 
     void ExitSafeZone()
