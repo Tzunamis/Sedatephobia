@@ -214,7 +214,6 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         
-        
     }
 
     public void EnterSafeZone(int safeZone)
