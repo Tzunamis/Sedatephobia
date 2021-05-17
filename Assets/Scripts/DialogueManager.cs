@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     TextMeshProUGUI midLeftText;
     TextMeshProUGUI topRightText;
     TextMeshProUGUI midRightText;
+    TextMeshProUGUI previousText;
 
     TextMeshProUGUI currentTextBox;
 
@@ -19,7 +20,8 @@ public class DialogueManager : MonoBehaviour
 
     Dialogue currentNarrativeDialogue; // Current narrative dialogue
     int currentNarrativeDialogueID;
-    bool firstNarrativeLine;
+    bool firstNarrativeLine = true;
+    bool lastNarrativeLine = false;
     string currentIntrusiveDialogue; // Intrusive dialogue to be printed
     int dialogueLocation; // Location of intrusive thought
     int previousDialogueLocation; // Tracks location of previous intrusive thought
@@ -44,8 +46,7 @@ public class DialogueManager : MonoBehaviour
     // These will be tracked using trigger zones
     bool isSafe = true; // Tracks whether player is in a safe zone or in darkness
     [HideInInspector]
-    public int safeZoneID = 0; // Tracks which location the player is in (or last visited)
-    float safeZoneTimer = 0; // Tracks time since player entered current safezone
+    int safeZoneID = 1; // Tracks which location the player is in (or last visited)
     float darknessTimer = 0; // Tracks time since player entered darkness
 
     // Start is called before the first frame update
@@ -57,6 +58,7 @@ public class DialogueManager : MonoBehaviour
         midLeftText = GameObject.Find("Text_MidLeft").GetComponent<TextMeshProUGUI>();
         topRightText = GameObject.Find("Text_TopRight").GetComponent<TextMeshProUGUI>();
         midRightText = GameObject.Find("Text_MidRight").GetComponent<TextMeshProUGUI>();
+        previousText = GameObject.Find("Text_Previous").GetComponent<TextMeshProUGUI>();
         currentNarrativeDialogue = narrativeDialogueBank[0];
         currentNarrativeDialogueID = 0;
 
@@ -66,6 +68,8 @@ public class DialogueManager : MonoBehaviour
         // Fill intrusive thoughts arraylist
         RefreshIntrusiveThoughts();
 
+        // Start room 1 dialogue
+        DisplayNarrativeDialogue();
     }
 
     // Update is called once per frame
@@ -200,20 +204,93 @@ public class DialogueManager : MonoBehaviour
 
     void DisplayNarrativeDialogue()
     {
+        Debug.Log("First: " + firstNarrativeLine);
+        Debug.Log("Last: " + lastNarrativeLine);
+
+        // Check if dialogue triggers safezone "destruction"
+        
+        int[] darknessTriggers = new int[] {1, 10, 15, 20, 25};
+        for(int i = 0; i < darknessTriggers.Length; i++)
+        {
+            if (currentNarrativeDialogueID == darknessTriggers[i])
+            {
+                // Trigger darkness
+                isSafe = false;
+                GameObject.Find("Room" + currentNarrativeDialogueID + "Spot").GetComponent<Light>().enabled = false;
+
+                /*
+                switch(currentNarrativeDialogue.safeZoneID)
+                {
+                    case 2:
+                        GameObject.Find("Room2Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 3:
+                        GameObject.Find("Room3Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 4:
+                        GameObject.Find("Room4Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 5:
+                        GameObject.Find("Room5Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 6:
+                        GameObject.Find("Room6Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 7:
+                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 8:
+                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 9:
+                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
+                        break;
+                    case 10:
+                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
+                        break; 
+                }
+                */
+            }
+        }
+        
+
+        // If last line was just displayed, fade out and stop displaying dialogue
+        if(lastNarrativeLine)
+        {
+            lastNarrativeLine = false;
+            StartCoroutine(FadeText(bottomText, false));
+            Invoke("ClearPreviousText", currentNarrativeDialogue.duration);
+            return;
+        }
+        // Change text to current line
         bottomText.text = currentNarrativeDialogue.text;
-        StartCoroutine(FadeText(bottomText, true));
+        if(firstNarrativeLine && currentNarrativeDialogueID != 0)
+        {
+            StartCoroutine(FadeText(bottomText, true));
+            firstNarrativeLine = false;
+        }
+        else if (currentNarrativeDialogueID != 0)
+        {
+            previousText.text = narrativeDialogueBank[currentNarrativeDialogueID - 1].text;
+        }
+        // Change to next line
         currentNarrativeDialogueID++;
         currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID];
-        if(currentNarrativeDialogue.safeZoneID == safeZoneID)
+
+        // Check if last line was just displayed
+        if (currentNarrativeDialogue.safeZoneID != safeZoneID)
         {
-            Invoke("DisplayNarrativeDialogue", currentNarrativeDialogue.duration);
+            lastNarrativeLine = true;
+            
         }
+
+        // Invoke this function after dialogue duration
+        Invoke("DisplayNarrativeDialogue", currentNarrativeDialogue.duration);
     }
 
-    IEnumerator NextNarrativeDialogue(TextMeshProUGUI textBox, float duration)
+    public void ClearPreviousText()
     {
-        yield return new WaitForSeconds(duration);
-        
+        FadeText(previousText, false);
     }
 
     public void EnterSafeZone(int safeZone)
@@ -223,6 +300,7 @@ public class DialogueManager : MonoBehaviour
             isSafe = true; // Player is safe
             safeZoneID = safeZone; // Set new safezone
             // Trigger first dialogue of area
+            firstNarrativeLine = true;
             DisplayNarrativeDialogue();
         }
                

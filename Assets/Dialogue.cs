@@ -11,8 +11,6 @@ public class Dialogue
 
     public int safeZoneID;
 
-    public int duration;
-
-    public bool fadeOut;
+    public float duration;
     
 }
