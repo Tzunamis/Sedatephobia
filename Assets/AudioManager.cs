@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    // Audio manager script taken from:
+    // https://www.youtube.com/watch?v=6OT43pvUyfY&ab_channel=Brackeys
 
-	public static AudioManager instance;
+    public static AudioManager instance;
 
 	public AudioMixerGroup mixerGroup;
 

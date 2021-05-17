@@ -204,9 +204,7 @@ public class DialogueManager : MonoBehaviour
 
     void DisplayNarrativeDialogue()
     {
-        Debug.Log("First: " + firstNarrativeLine);
-        Debug.Log("Last: " + lastNarrativeLine);
-
+        
         // Check if dialogue triggers safezone "destruction"
         
         int[] darknessTriggers = new int[] {1, 10, 15, 20, 25};
@@ -217,39 +215,12 @@ public class DialogueManager : MonoBehaviour
                 // Trigger darkness
                 isSafe = false;
                 GameObject.Find("Room" + currentNarrativeDialogueID + "Spot").GetComponent<Light>().enabled = false;
+                
+            }
 
-                /*
-                switch(currentNarrativeDialogue.safeZoneID)
-                {
-                    case 2:
-                        GameObject.Find("Room2Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 3:
-                        GameObject.Find("Room3Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 4:
-                        GameObject.Find("Room4Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 5:
-                        GameObject.Find("Room5Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 6:
-                        GameObject.Find("Room6Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 7:
-                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 8:
-                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 9:
-                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
-                        break;
-                    case 10:
-                        GameObject.Find("Room1Spot").GetComponent<Light>().enabled = false;
-                        break; 
-                }
-                */
+            if(currentNarrativeDialogueID == 1)
+            {
+                GameObject.Find("Camera").GetComponent<AudioSource>().Stop();
             }
         }
         
@@ -290,7 +261,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ClearPreviousText()
     {
-        FadeText(previousText, false);
+        StartCoroutine(FadeText(previousText, false));
     }
 
     public void EnterSafeZone(int safeZone)

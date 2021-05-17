@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 145080754}
   - component: {fileID: 145080752}
   - component: {fileID: 145080753}
+  - component: {fileID: 145080755}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Player
@@ -596,6 +597,102 @@ Transform:
   m_Father: {fileID: 959867608}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &145080755
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145080751}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7a3ec0199ea119e458d32c0c7bb4c71a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &158091494
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +885,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 65282ae86c87ea44998446a00739a970, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1362,6 +1459,161 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &292927041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292927042}
+  - component: {fileID: 292927045}
+  - component: {fileID: 292927044}
+  - component: {fileID: 292927043}
+  m_Layer: 0
+  m_Name: CabinAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &292927042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292927041}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0300009, y: 0.9386074, z: 0.81633586}
+  m_LocalScale: {x: 0.5395542, y: 0.9577626, z: 0.54215026}
+  m_Children: []
+  m_Father: {fileID: 1000753473}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &292927043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292927041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b589b1ae1b4a046842cdf20f818eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &292927044
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292927041}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 20
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!82 &292927045
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292927041}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &355398931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,21 +1816,345 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTime: 2
   narrativeDialogueBank:
-  - name: Room1Dialogue1
-    text: '""'
+  - name: Room1Walkman
+    text: 
     safeZoneID: 1
-    duration: 5
-  - name: Room1Dialogue2
+    duration: 10
+  - name: Room1Dialogue1
     text: It's gone. The music's gone!
     safeZoneID: 1
     duration: 4
-  - name: Room1Dialogue3
-    text: With the dialogue
+  - name: Room1Dialogue2
+    text: Okay, okay, deep breaths.
     safeZoneID: 1
     duration: 10
-  - name: Room1Dialogue4
-    text: babyyyyy
+  - name: Room1Dialogue3
+    text: "I\u2019m almost there. Almost there. Alright\u2026"
     safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue4
+    text: "I guess giving it a good smack won\u2019t make it work again, huh?"
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue5
+    text: "It\u2019s alright, just a little further. Nothing to be scared of."
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue6
+    text: "This doesn\u2019t look like the path I usually take. Where am I?"
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue7
+    text: "Maybe if I keep going, I can find some help\u2026"
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue8
+    text: "Quiet. Too quiet. I don\u2019t like this."
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue9
+    text: "Come on, snap out of it. You\u2019re fine."
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue10
+    text: I really need to get this stupid thing working again.
+    safeZoneID: 1
+    duration: 5
+  - name: Room1Dialogue11
+    text: There has to be something around here, right? Anything?!
+    safeZoneID: 1
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue2
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue3
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue4
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue5
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue6
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue7
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue8
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue9
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue10
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
+    duration: 5
+  - name: Room2Dialogue1
+    text: Room 2 dialogue babyyy
+    safeZoneID: 2
     duration: 5
   - name: Room2Dialogue1
     text: Room 2 dialogue babyyy
@@ -3745,7 +4321,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 90e197e7cac99c144a6fa4e213b7e44f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4409,6 +4985,7 @@ Transform:
   - {fileID: 861090504}
   - {fileID: 833273215}
   - {fileID: 511964153}
+  - {fileID: 292927042}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4833,7 +5410,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 90e197e7cac99c144a6fa4e213b7e44f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5484,7 +6061,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 780c82f913c36f348b5c18c1a102feb3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5965,9 +6542,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 1416957518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fcf2712ffbbf8847ad31f824924d7a5, type: 3}
+  m_Script: {fileID: 11500000, guid: ee51953df22ebb642a3dc26d101a5734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: Slime
+    clip: {fileID: 8300000, guid: 48856ef1dfb5fc04aad6d528fa50b52b, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: CreepyBackground
+    clip: {fileID: 8300000, guid: 3c2f6cb2ad615b24c9755686ecc03093, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Wind1
+    clip: {fileID: 8300000, guid: 87799eefa08a38144aeb42be3682538e, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Wind2
+    clip: {fileID: 8300000, guid: 1ce77c7d72d5b534cb11be73de6f52ba, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Footsteps
+    clip: {fileID: 8300000, guid: 221b03d40c00f344991a6a42f93548e6, type: 3}
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Heartbeat
+    clip: {fileID: 8300000, guid: 7823007b8d2fd304a947e729a5f39385, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Breathing
+    clip: {fileID: 8300000, guid: f6276191a88449d459566ae87bdc288f, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &1416957520
 Transform:
   m_ObjectHideFlags: 0
@@ -6240,7 +6882,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 991726756e5ebc4468cc2ce31e69fd88, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -13742,7 +14384,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c864cc396b9394a4e8e2ad381ab88160, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9cc955cc76ca64f4e90371a35b5590c1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

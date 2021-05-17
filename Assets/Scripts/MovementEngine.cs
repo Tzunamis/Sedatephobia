@@ -15,6 +15,8 @@ public class MovementEngine : MonoBehaviour
     CharacterController Controller;
     public float MoveSpeed;
     float StartHeight;
+    AudioManager audioManager;
+
     void Start()
     {
         StartHeight = gameObject.transform.position.y;
@@ -23,6 +25,7 @@ public class MovementEngine : MonoBehaviour
         Camera = GameObject.Find("Camera");
         Controller = GetComponent<CharacterController>();
         Invoke("MakeControllable", 1); // The editor is a bit buggy on startup with mouse controls, this shouldn't be needed in a build.
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
     void FixedUpdate()
     {
@@ -40,6 +43,17 @@ public class MovementEngine : MonoBehaviour
             float Yvel = Input.GetAxis("UpDown") * MoveSpeed;
             Controller.Move((Camera.transform.right * Xvel + Camera.transform.forward * Yvel));
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, StartHeight, gameObject.transform.position.z);
+
+            if(Input.GetButton("w") || Input.GetButton("a") || Input.GetButton("s") || Input.GetButton("d"))
+            {
+                if(!audioManager.sounds[4].source.isPlaying)
+                    audioManager.Play("Footsteps");
+            }
+            else
+            {
+                audioManager.sounds[4].source.Stop();
+            }
+
         }
     }
 
