@@ -2293,7 +2293,58 @@ MonoBehaviour:
     text: Room 2 dialogue babyyy
     safeZoneID: 2
     duration: 5
-  intrusiveThoughtsBank: []
+  intrusiveThoughtsBank:
+  - "You\u2019re so precious when you smile"
+  - I know you
+  - "I\u2019ve seen what you are"
+  - What a terrible night to exist
+  - Existence is futile
+  - Running is pointless
+  - Wrong way, sweetheart
+  - "What\u2019s that sound?"
+  - "What\u2019s wrong with your brain?"
+  - Are you crying?
+  - What a crybaby
+  - Silence begets regrets
+  - Nothing remains
+  - Too scared to run
+  - Your faults alter your mind
+  - Weak of heart, cowardice blossoms
+  - Stare in the nothingness of your future
+  - A foreshadowing in the making
+  - Be aware of what lurks within your head
+  - Desiccate your brain, cry your heart out
+  - "I\u2019ll rip you apart"
+  - No talking your way out of this one
+  - Nobody wants you here
+  - Demons whisper, they call your name
+  - There is nothing to stop this
+  - Save face and hide
+  - Pitiful creature
+  - Scurry like the critter you are
+  - Nobody will come for you
+  - An evening with yourself
+  - Loneliness echoes in your footsteps
+  - Lay down and waste away
+  - Imagine living this way
+  - Nobody will remember you
+  - Crawl in the hole you belong in
+  - The end is near
+  - Your world is ending
+  - "No cure for what you\u2019ll do to yourself"
+  - Swallow your tongue, smother your voice
+  - Lost souls never return
+  - Waste and ruin await you
+  - You have a losing hand
+  - Lips move, darkness pours
+  - Be one with your misery
+  - Never alone, always lonely
+  - Fade away in the shadow of who you once were
+  - Your sins swallow you whole
+  - Underneath your skin, devouring your brain
+  - You are rotting away
+  - "You can\u2019t even look at yourself, can you?"
+  - A soulless being in a lifeless body
 --- !u!4 &458789166
 Transform:
   m_ObjectHideFlags: 0
