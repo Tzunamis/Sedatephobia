@@ -274,6 +274,8 @@ public class DialogueManager : MonoBehaviour
                 titleText.text = "";
             }
         }
+        
+
         // If last line was just displayed, fade out and stop displaying dialogue
         if(lastNarrativeLine)
         {
