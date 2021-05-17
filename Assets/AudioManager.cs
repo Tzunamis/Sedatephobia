@@ -57,23 +57,33 @@ public class AudioManager : MonoBehaviour
 		s.source.Play();
 	}
 
-    public IEnumerator FadeSound(string sound, bool fadeIn)
+    public void FadeTheSound(string sound, bool fadeIn)
+    {
+        StartCoroutine(FadeSound(sound, fadeIn));
+    }
+
+    IEnumerator FadeSound(string sound, bool fadeIn)
     {
         Sound s = Array.Find(sounds, item => item.name == sound);
+        
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
             yield break;
         }
+        
 
         if (fadeIn)
         {
+            Debug.Log("Fade in wind");
             s.source.volume = 0;
+            
             while (s.source.volume < s.maxVolume)
             {
-                s.source.volume += (Time.deltaTime / fadeTime);
+                s.source.volume += (0.01f);
                 yield return null;
             }
+            
         }
         else
         {

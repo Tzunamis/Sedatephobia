@@ -50,6 +50,9 @@ public class DialogueManager : MonoBehaviour
 
     // AUDIO
     AudioManager audioManager;
+    int windDelay;
+    int heartbeatDelay;
+    int breathingDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +75,7 @@ public class DialogueManager : MonoBehaviour
         // Fill intrusive thoughts arraylist
         RefreshIntrusiveThoughts();
 
-
+        // Empty UI boxes
         bottomText.text = "";
         topLeftText.text = "";
         midLeftText.text = "";
@@ -83,6 +86,11 @@ public class DialogueManager : MonoBehaviour
 
         // Display title
         Invoke("DisplayTitleCard", 5);
+
+        // Set initial sound delay values
+        windDelay = 0;
+        heartbeatDelay = 15;
+        breathingDelay = 30;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -102,28 +110,28 @@ public class DialogueManager : MonoBehaviour
             //FADE OUT DARKNESS SOUNDS
 
             // Wind 1
-            if(audioManager.sounds[2].source.isPlaying)
+            if (audioManager.sounds[2].source.isPlaying)
             {
                 Debug.Log("Fadeout wind");
-                audioManager.FadeSound("Wind1", false);
+                audioManager.FadeTheSound("Wind1", false);
             }
 
             // Wind 2
             if (audioManager.sounds[3].source.isPlaying)
             {
-                audioManager.FadeSound("Wind2", false);
+                audioManager.FadeTheSound("Wind2", false);
             }
 
             // Heartbeat
             if (audioManager.sounds[5].source.isPlaying)
             {
-                audioManager.FadeSound("Heartbeat", false);
+                audioManager.FadeTheSound("Heartbeat", false);
             }
 
             // Breathing
             if (audioManager.sounds[6].source.isPlaying)
             {
-                audioManager.FadeSound("Breathing", false);
+                audioManager.FadeTheSound("Breathing", false);
             }
         }
 
@@ -131,12 +139,38 @@ public class DialogueManager : MonoBehaviour
         {
             darknessTimer += Time.deltaTime;
             // Manage darkness audio
-            if(!audioManager.sounds[2].source.isPlaying)
+
+            if (darknessTimer > windDelay)
             {
-                Debug.Log("Fadein wind");
-                audioManager.Play("Wind1");
-                audioManager.FadeSound("Wind1", true);
+                if (!audioManager.sounds[2].source.isPlaying)
+                {
+                    audioManager.Play("Wind1");
+                    audioManager.FadeTheSound("Wind1", true);
+                }
+                if (!audioManager.sounds[3].source.isPlaying)
+                {
+                    audioManager.Play("Wind2");
+                    audioManager.FadeTheSound("Wind2", true);
+                }
             }
+            
+            if(darknessTimer > breathingDelay)
+            {
+                if (!audioManager.sounds[5].source.isPlaying)
+                {
+                    audioManager.Play("Heartbeat");
+                    audioManager.FadeTheSound("Heartbeat", true);
+                }
+            }
+            if(darknessTimer > heartbeatDelay)
+            {
+                if (!audioManager.sounds[6].source.isPlaying)
+                {
+                    audioManager.Play("Breathing");
+                    audioManager.FadeTheSound("Breathing", true);
+                }
+            }
+
         }
     }
 
