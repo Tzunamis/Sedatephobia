@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     TextMeshProUGUI topRightText;
     TextMeshProUGUI midRightText;
     TextMeshProUGUI previousText;
+    TextMeshProUGUI titleText;
 
     TextMeshProUGUI currentTextBox;
 
@@ -25,13 +26,13 @@ public class DialogueManager : MonoBehaviour
     string currentIntrusiveDialogue; // Intrusive dialogue to be printed
     int dialogueLocation; // Location of intrusive thought
     int previousDialogueLocation; // Tracks location of previous intrusive thought
-    public float fadeTime; // Duration of text fade
+    float fadeTime; // Duration of text fade
 
     // Dialogue for safe areas that is essential for the player to see 
     public Dialogue[] narrativeDialogueBank;
     // Dialogue for darkness, which will likely be randomized
     string[] groundedThoughtsBank; // "Grounded" thoughts that appear on the bottom of the screen
-    string[] intrusiveThoughtsBank; // "Intrusive" thoughts that appear all over the screen
+    public string[] intrusiveThoughtsBank; // "Intrusive" thoughts that appear all over the screen
     ArrayList intrusiveThoughts = new ArrayList();
 
     // Variables below allow us to randomize position of "intrusive" thoughts within a range
@@ -40,14 +41,15 @@ public class DialogueManager : MonoBehaviour
     int minPosY = 0;
     int maxPosY = 0;
 
-    
-
     // PLAYER STATUS
     // These will be tracked using trigger zones
     bool isSafe = true; // Tracks whether player is in a safe zone or in darkness
     [HideInInspector]
     int safeZoneID = 1; // Tracks which location the player is in (or last visited)
     float darknessTimer = 0; // Tracks time since player entered darkness
+
+    // AUDIO
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -59,14 +61,28 @@ public class DialogueManager : MonoBehaviour
         topRightText = GameObject.Find("Text_TopRight").GetComponent<TextMeshProUGUI>();
         midRightText = GameObject.Find("Text_MidRight").GetComponent<TextMeshProUGUI>();
         previousText = GameObject.Find("Text_Previous").GetComponent<TextMeshProUGUI>();
+        titleText = GameObject.Find("Text_Title").GetComponent<TextMeshProUGUI>();
         currentNarrativeDialogue = narrativeDialogueBank[0];
         currentNarrativeDialogueID = 0;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         // Build intrusive thoughts bank
         BuildIntrusiveThoughtsBank();
 
         // Fill intrusive thoughts arraylist
         RefreshIntrusiveThoughts();
+
+
+        bottomText.text = "";
+        topLeftText.text = "";
+        midLeftText.text = "";
+        topRightText.text = "";
+        midRightText.text = "";
+        previousText.text = "";
+        titleText.color = new Color(titleText.color.r, titleText.color.g, titleText.color.b, 0);
+
+        // Display title
+        Invoke("DisplayTitleCard", 5);
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -83,13 +99,51 @@ public class DialogueManager : MonoBehaviour
 
         if (isSafe)
         {
-            // Any general purpose safe zone stuff?
+            //FADE OUT DARKNESS SOUNDS
+
+            // Wind 1
+            if(audioManager.sounds[2].source.isPlaying)
+            {
+                Debug.Log("Fadeout wind");
+                audioManager.FadeSound("Wind1", false);
+            }
+
+            // Wind 2
+            if (audioManager.sounds[3].source.isPlaying)
+            {
+                audioManager.FadeSound("Wind2", false);
+            }
+
+            // Heartbeat
+            if (audioManager.sounds[5].source.isPlaying)
+            {
+                audioManager.FadeSound("Heartbeat", false);
+            }
+
+            // Breathing
+            if (audioManager.sounds[6].source.isPlaying)
+            {
+                audioManager.FadeSound("Breathing", false);
+            }
         }
 
         else
         {
             darknessTimer += Time.deltaTime;
+            // Manage darkness audio
+            if(!audioManager.sounds[2].source.isPlaying)
+            {
+                Debug.Log("Fadein wind");
+                audioManager.Play("Wind1");
+                audioManager.FadeSound("Wind1", true);
+            }
         }
+    }
+
+    void DisplayTitleCard()
+    {
+        fadeTime = 10;
+        StartCoroutine(FadeText(titleText, true));
     }
 
     void DisplayIntrusiveThought()
@@ -180,25 +234,21 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(FadeText(textBox, true));
     }
 
-    IEnumerator FadeText(TextMeshProUGUI textBox, bool fadeIn)
+    void BuildIntrusiveThoughtsBank()
     {
-        if(fadeIn)
+        intrusiveThoughtsBank = new string[5];
+        intrusiveThoughtsBank[0] = "You're worthless";
+        intrusiveThoughtsBank[1] = "Nobody likes you";
+        intrusiveThoughtsBank[2] = "Jump off a bridge";
+        intrusiveThoughtsBank[3] = "Stupid piece of shit";
+        intrusiveThoughtsBank[4] = "Ur mom gay";
+    }
+
+    void RefreshIntrusiveThoughts()
+    {
+        for (int i = 0; i < intrusiveThoughtsBank.Length; i++)
         {
-            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0);
-            while (textBox.color.a < 1.0f)
-            {
-                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a + (Time.deltaTime / fadeTime));
-                yield return null;
-            }
-        }
-        else
-        {
-            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 1);
-            while (textBox.color.a > 0.0f)
-            {
-                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a - (Time.deltaTime / fadeTime));
-                yield return null;
-            }
+            intrusiveThoughts.Add(intrusiveThoughtsBank[i]);
         }
     }
 
@@ -213,7 +263,7 @@ public class DialogueManager : MonoBehaviour
             if (currentNarrativeDialogueID == darknessTriggers[i])
             {
                 // Trigger darkness
-                isSafe = false;
+                ExitSafeZone();
                 GameObject.Find("Room" + currentNarrativeDialogueID + "Spot").GetComponent<Light>().enabled = false;
                 
             }
@@ -221,6 +271,7 @@ public class DialogueManager : MonoBehaviour
             if(currentNarrativeDialogueID == 1)
             {
                 GameObject.Find("Camera").GetComponent<AudioSource>().Stop();
+                titleText.text = "";
             }
         }
         
@@ -256,7 +307,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Invoke this function after dialogue duration
-        Invoke("DisplayNarrativeDialogue", currentNarrativeDialogue.duration);
+        Invoke("DisplayNarrativeDialogue", narrativeDialogueBank[currentNarrativeDialogueID - 1].duration);
     }
 
     public void ClearPreviousText()
@@ -281,25 +332,28 @@ public class DialogueManager : MonoBehaviour
     {
         darknessTimer = 0; // Reset timer
         isSafe = false;
-
-        // TRIGGER DARKNESS AUDIO
     }
 
-    void BuildIntrusiveThoughtsBank()
+    IEnumerator FadeText(TextMeshProUGUI textBox, bool fadeIn)
     {
-        intrusiveThoughtsBank = new string[5];
-        intrusiveThoughtsBank[0] = "You're worthless";
-        intrusiveThoughtsBank[1] = "Nobody likes you";
-        intrusiveThoughtsBank[2] = "Jump off a bridge";
-        intrusiveThoughtsBank[3] = "Stupid piece of shit";
-        intrusiveThoughtsBank[4] = "Ur mom gay";
-    }
-
-    void RefreshIntrusiveThoughts()
-    {
-        for (int i = 0; i < intrusiveThoughtsBank.Length; i++)
+        if (fadeIn)
         {
-            intrusiveThoughts.Add(intrusiveThoughtsBank[i]);
+            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0);
+            while (textBox.color.a < 1.0f)
+            {
+                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a + (Time.deltaTime / fadeTime));
+                yield return null;
+            }
         }
+        else
+        {
+            textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 1);
+            while (textBox.color.a > 0.0f)
+            {
+                textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, textBox.color.a - (Time.deltaTime / fadeTime));
+                yield return null;
+            }
+        }
+        fadeTime = 2;
     }
 }

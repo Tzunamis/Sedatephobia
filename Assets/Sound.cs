@@ -13,6 +13,8 @@ public class Sound {
 	[Range(0f, 1f)]
 	public float volumeVariance = .1f;
 
+    public float maxVolume;
+
 	[Range(.1f, 3f)]
 	public float pitch = 1f;
 	[Range(0f, 1f)]

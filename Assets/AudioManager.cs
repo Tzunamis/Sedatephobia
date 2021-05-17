@@ -1,17 +1,23 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     // Audio manager script taken from:
     // https://www.youtube.com/watch?v=6OT43pvUyfY&ab_channel=Brackeys
 
+    public float fadeTime;
+
     public static AudioManager instance;
 
 	public AudioMixerGroup mixerGroup;
 
 	public Sound[] sounds;
+
+
 
 	void Awake()
 	{
@@ -30,6 +36,7 @@ public class AudioManager : MonoBehaviour
 			s.source = gameObject.AddComponent<AudioSource>();
 			s.source.clip = s.clip;
 			s.source.loop = s.loop;
+            s.maxVolume = s.source.volume;
 
 			s.source.outputAudioMixerGroup = mixerGroup;
 		}
@@ -50,4 +57,31 @@ public class AudioManager : MonoBehaviour
 		s.source.Play();
 	}
 
+    public IEnumerator FadeSound(string sound, bool fadeIn)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            yield break;
+        }
+
+        if (fadeIn)
+        {
+            s.source.volume = 0;
+            while (s.source.volume < s.maxVolume)
+            {
+                s.source.volume += (Time.deltaTime / fadeTime);
+                yield return null;
+            }
+        }
+        else
+        {
+            while (s.source.volume > 0)
+            {
+                s.source.volume -= (Time.deltaTime / fadeTime);
+                yield return null;
+            }
+        }
+    }
 }
