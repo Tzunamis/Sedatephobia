@@ -69,9 +69,6 @@ public class DialogueManager : MonoBehaviour
         currentNarrativeDialogueID = 0;
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
-        // Build intrusive thoughts bank
-        BuildIntrusiveThoughtsBank();
-
         // Fill intrusive thoughts arraylist
         RefreshIntrusiveThoughts();
 
@@ -89,8 +86,8 @@ public class DialogueManager : MonoBehaviour
 
         // Set initial sound delay values
         windDelay = 0;
-        heartbeatDelay = 15;
-        breathingDelay = 30;
+        heartbeatDelay = 20;
+        breathingDelay = 40;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -268,16 +265,6 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(FadeText(textBox, true));
     }
 
-    void BuildIntrusiveThoughtsBank()
-    {
-        intrusiveThoughtsBank = new string[5];
-        intrusiveThoughtsBank[0] = "You're worthless";
-        intrusiveThoughtsBank[1] = "Nobody likes you";
-        intrusiveThoughtsBank[2] = "Jump off a bridge";
-        intrusiveThoughtsBank[3] = "Stupid piece of shit";
-        intrusiveThoughtsBank[4] = "Ur mom gay";
-    }
-
     void RefreshIntrusiveThoughts()
     {
         for (int i = 0; i < intrusiveThoughtsBank.Length; i++)
@@ -366,6 +353,9 @@ public class DialogueManager : MonoBehaviour
     {
         darknessTimer = 0; // Reset timer
         isSafe = false;
+        //Reduce darkness sound cooldowns
+        heartbeatDelay -= 2;
+        breathingDelay -= 4;
     }
 
     IEnumerator FadeText(TextMeshProUGUI textBox, bool fadeIn)
