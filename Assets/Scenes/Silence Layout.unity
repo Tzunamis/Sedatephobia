@@ -1614,6 +1614,63 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &298633792
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 38.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -74.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
+      propertyPath: m_Name
+      value: EyeballFreak_ANimMDL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb308b7cd2b7ca345b48862486e2a0c3, type: 3}
 --- !u!1 &355398931
 GameObject:
   m_ObjectHideFlags: 0
@@ -15128,63 +15185,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c37f194c43dd8c48bdcec20d50db468, type: 3}
---- !u!1001 &508733996180883713
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -608.7625
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 246.95877
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1425.805
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 37677664086324767, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 850629535943928997, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
-      propertyPath: m_Name
-      value: EyeballFreak_Uni
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8bd2f44ffd92aef469e2bc89e4bf7c26, type: 3}
 --- !u!1001 &2231015174024369843
 PrefabInstance:
   m_ObjectHideFlags: 0
