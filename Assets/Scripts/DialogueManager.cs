@@ -95,13 +95,13 @@ public class DialogueManager : MonoBehaviour
 
         // Set initial darkness trigger delay values
         windDelay = 0;
-        heartbeatDelay = 0;
-        breathingDelay = 40;
-        fastBreathingDelay = 60;
+        heartbeatDelay = 20;
+        breathingDelay = 0;
+        fastBreathingDelay = 10;
         eyeballDelay = 65;
-        intrusiveThoughtsDelay = 1000;
+        intrusiveThoughtsDelay = 2;
         intrusiveThoughtsDelayModifier = 1.5f;
-        minimumIntrusiveThoughtsDelay = 20;
+        minimumIntrusiveThoughtsDelay = 2;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -172,21 +172,26 @@ public class DialogueManager : MonoBehaviour
                 {
                     audioManager.Play("Breathing");
                     audioManager.FadeTheSound("Breathing", true);
-                    audioManager.sounds[6].source.pitch = 0.9f;
+                    if(darknessTimer < fastBreathingDelay)
+                        audioManager.sounds[6].source.pitch = 0.9f;
                 }
             }
             
             if(darknessTimer > fastBreathingDelay)
             {
-                if(audioManager.sounds[6].source.isPlaying)
+                if(audioManager.sounds[6].source.isPlaying && audioManager.sounds[6].source.pitch < 1)
                 {
-                    audioManager.sounds[6].source.pitch = 1;
+                    audioManager.sounds[6].source.pitch += 0.0005f;
                 }
             }
 
-            // Eyeball stuff
+            // EYEBALL STUFF
+            if(darknessTimer > eyeballDelay)
+            {
+                // SPAWN EYEBALL
+            }
 
-            
+            // Intrusive thought stuff
             if(intrusiveThoughtsTimer > intrusiveThoughtsDelay)
             {
                 // Generate intrusive thoughts
@@ -216,20 +221,24 @@ public class DialogueManager : MonoBehaviour
         } while (dialogueLocation == previousDialogueLocation);
         previousDialogueLocation = dialogueLocation;
 
-        // Set text box according to location
+        // Set text box according to location, and prepare to wipe text
         switch (dialogueLocation)
         {
             case 1:
                 currentTextBox = topLeftText;
+                Invoke("KillTopLeftText", 5);
                 break;
             case 2:
                 currentTextBox = midLeftText;
+                Invoke("KillMidLeftText", 5);
                 break;
             case 3:
                 currentTextBox = topRightText;
+                Invoke("KillTopRightText", 5);
                 break;
             case 4:
                 currentTextBox = midRightText;
+                Invoke("KillMidRightText", 5);
                 break;
         }
 
@@ -351,10 +360,8 @@ public class DialogueManager : MonoBehaviour
             playingNarrativeDialogue = false;
             StartCoroutine(FadeText(bottomText, false));
             ClearPreviousText();
-            Debug.Log("last line");
             return;
         }
-        Debug.Log("not last line");
         // Change text to current line
         bottomText.text = currentNarrativeDialogue.text;
         if(firstNarrativeLine && currentNarrativeDialogueID != 0)
@@ -445,5 +452,25 @@ public class DialogueManager : MonoBehaviour
             }
         }
         fadeTime = 2;
+    }
+
+    void KillTopLeftText()
+    {
+        topLeftText.text = "";
+    }
+
+    void KillMidLeftText()
+    {
+        midLeftText.text = "";
+    }
+
+    void KillTopRightText()
+    {
+        topRightText.text = "";
+    }
+
+    void KillMidRightText()
+    {
+        midRightText.text = "";
     }
 }
