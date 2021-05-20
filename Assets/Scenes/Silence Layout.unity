@@ -2095,103 +2095,103 @@ MonoBehaviour:
     text: "This can\u2019t be real. Just, please, one song!"
     safeZoneID: 2
     duration: 5
-  - name: Room 3 Dialogue 1
+  - name: Room 2 Dialogue 11
     text: "Radio was a bust\u2026 again. Could never rely on it, anyways."
-    safeZoneID: 3
+    safeZoneID: 2
     duration: 5
-  - name: Room 3 Dialogue 2
+  - name: Room 2 Dialogue 12
     text: "I-It\u2019s alright, I\u2019ll find something better, right?"
-    safeZoneID: 3
+    safeZoneID: 2
     duration: 5
-  - name: Room 3 Dialogue 3
+  - name: Room 2 Dialogue 13
     text: M-Maybe I can find batteries laying somewhere around here. Right! Just
       like in the movies.
-    safeZoneID: 3
+    safeZoneID: 2
     duration: 5
-  - name: Room 3 Dialogue 4
+  - name: Room 2 Dialogue 14
     text: "One step at a time. That\u2019s it."
-    safeZoneID: 3
+    safeZoneID: 2
     duration: 5
-  - name: Room 3 Dialogue 5
+  - name: Room 3 Dialogue 1
     text: "That can\u2019t be it. No way. Is that\u2026 my old TV? Mom got it for
       me when I left for--! Oh, right, that seemed so long ago, now."
     safeZoneID: 3
     duration: 5
-  - name: Room 3 Dialogue 6
+  - name: Room 3 Dialogue 2
     text: "H-Hey, if it isn\u2019t my best buddy from college. We went through some
       stuff together, didn\u2019t we? Y-You wouldn\u2019t let me down, would you?"
     safeZoneID: 3
     duration: 5
-  - name: Room 3 Dialogue 7
+  - name: Room 3 Dialogue 3
     text: It feels like I should be able to hear white noise, at least, no?
     safeZoneID: 3
     duration: 5
-  - name: Room 3 Dialogue 8
+  - name: Room 3 Dialogue 4
     text: "Wait, I can hear something, but\u2026 how? It\u2019s not even plugged
       in!"
     safeZoneID: 3
     duration: 5
-  - name: Room 3 Dialogue 9
+  - name: Room 3 Dialogue 5
     text: Seriously, not you too?! Come on, please! I need this!
     safeZoneID: 3
     duration: 5
-  - name: Room 3 Dialogue 10
+  - name: Room 3 Dialogue 6
     text: "It\u2019s not because I smashed you in with a bat, i-is it? W-Well, I
       mean, I guess you look just like new, so it\u2019s all forgiven, right?"
     safeZoneID: 3
     duration: 5
-  - name: Room 4 Dialogue 1
+  - name: Room 3 Dialogue 7
     text: "Okay, alright, you\u2019re alright. I-It\u2019s all a dream. That\u2019s
       it. All a dream. Ouch! O-Okay, I didn\u2019t wake up. T-That\u2019s alright.
       I\u2019m probably in a deep, deep sleep. S-So deep that I can\u2019t pinch
       myself awake! Yes! Yes, that\u2019s what it is. N-Nothing more."
-    safeZoneID: 4
+    safeZoneID: 3
     duration: 5
-  - name: Room 4 Dialogue 2
+  - name: Room 3 Dialogue 8
     text: 'Deep breaths, like mom showed you. '
-    safeZoneID: 4
+    safeZoneID: 3
     duration: 5
-  - name: Room 4 Dialogue 3
+  - name: Room 4 Dialogue 1
     text: "\u2026What is that infernal thing doing here? That\u2019s grandma\u2019s
       old phone! She gave it to me for my birthday. I was pretty angry at her back
       then. It\u2019s no iCell, but it never failed me so far. M-More or less. I
       wish I could\u2019ve apologized to her before\u2026 Well, nevermind that, now."
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 4
+  - name: Room 4 Dialogue 2
     text: "Did it ring?! How?! Hello? Why can\u2019t I talk? I\u2019m sorry. I-I\u2019m
       so sorry. I\u2019m just so scared, I can\u2019t\u2026"
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 5
+  - name: Room 4 Dialogue 3
     text: This is really starting to creep me out. Is someone spying on me? What
       are my old things doing out here?!
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 6
+  - name: Room 4 Dialogue 4
     text: "What was that? Is someone following me? I-I can\u2019t stay here."
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 7
+  - name: Room 4 Dialogue 5
     text: "I need to get out of here. There\u2019s no sound. I need to keep going."
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 8
+  - name: Room 4 Dialogue 6
     text: "I remember there was blood behind it. It stained and we could never wipe
       it clean. I\u2019m not going to check, though. Too many bad memories."
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 9
+  - name: Room 4 Dialogue 7
     text: "I wish grandma was still here. Mom. Uncle Francis\u2026"
     safeZoneID: 4
     duration: 5
-  - name: Room 4 Dialogue 10
+  - name: Room 4 Dialogue 8
     text: "Why is this making my skin crawl? I don\u2019t like this; I need to get
       home. Fast."
     safeZoneID: 4
     duration: 5
   - name: Room 5 Dialogue 1
-    text: "Is someone here? I know you\u2019re here"
+    text: "Is someone here? I know you\u2019re here."
     safeZoneID: 5
     duration: 5
   - name: Room 5 Dialogue 2
@@ -2201,12 +2201,12 @@ MonoBehaviour:
   - name: Room 5 Dialogue 3
     text: "Micca. My partner. My friend. He always used to put it on whenever I had
       a bad day. He was so kind to me a-and I just\u2026 I can\u2019t believe he\u2019s
-      gone too. He didn\u2019t deserve going like this."
+      gone too. He didn\u2019t deserve to go like this."
     safeZoneID: 5
     duration: 5
   - name: Room 5 Dialogue 4
     text: "Is that\u2026 a kettle whistle? Is someone making tea? There is a pleasant
-      smell. Oddly floral\u2026 Micca\u2019s favorite bland."
+      smell. Oddly floral\u2026 Micca\u2019s favorite blend."
     safeZoneID: 5
     duration: 5
   - name: Room 5 Dialogue 5
@@ -2250,8 +2250,7 @@ MonoBehaviour:
     duration: 5
   - name: Room 6 Dialogue 4
     text: "I lost so much. I thought you\u2019d understand, but you never could,
-      could you? Emotions were never your forte, were they? Too unpredictable. Nothing
-      like you."
+      could you? Emotions were never your forte, were they? Too unpredictable."
     safeZoneID: 6
     duration: 5
   - name: Room 6 Dialogue 5
@@ -2326,7 +2325,7 @@ MonoBehaviour:
     safeZoneID: 8
     duration: 5
   - name: Room 8 Dialogue 4
-    text: How much longer are you going to torture me?! Let me go!ialogue babyyy
+    text: How much longer are you going to torture me?! Let me go!
     safeZoneID: 8
     duration: 5
   - name: Room 8 Dialogue 5
@@ -2347,66 +2346,65 @@ MonoBehaviour:
       left, anyways. Nobody to save me. Nobody that cares about how miserable I am.
     safeZoneID: 8
     duration: 5
-  - name: Room 8 Dialogue 9
-    text: "I\u2019m so tired. Why are you doing this to me?"
-    safeZoneID: 8
-    duration: 5
   - name: Room 9 Dialogue 1
-    text: "Didn\u2019t I grieve enough?! Answer me!"
+    text: "I\u2019m so tired. Why are you doing this to me?"
     safeZoneID: 9
     duration: 5
   - name: Room 9 Dialogue 2
+    text: "Didn\u2019t I grieve enough?! Answer me!"
+    safeZoneID: 9
+    duration: 5
+  - name: Room 9 Dialogue 3
     text: "Don\u2019t leave me! Don\u2019t leave me on my own\u2026 Please, I can\u2019t
       do this!"
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 3
+  - name: Room 9 Dialogue 4
     text: "I\u2019m so sorry. Please! I need you. Don\u2019t leave me here. I can\u2019t
       live with my thoughts. My mind is a mess. How could you all do this to me?!
       What did I do?! Answer me!"
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 4
+  - name: Room 9 Dialogue 5
     text: A whistle. A ring. A roar. Anything! Please!
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 5
+  - name: Room 9 Dialogue 6
     text: "They\u2019re gone. They\u2019re all gone. I\u2019m not sleeping. I\u2019m
       not dreaming. I\u2019m still here and they all left me behind. Please\u2026
       Come back to me. I promise I\u2019ll do better. I promise."
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 6
+  - name: Room 9 Dialogue 7
     text: "I can\u2019t bear it. This never-ending silence. No replies. Only darkness.
       Only loneliness. Only silence wherever I go."
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 7
+  - name: Room 9 Dialogue 8
     text: Please, talk to me. I want to hear you laugh again. I want to see your
       smiles. Did you really all hate me that much?
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 8
+  - name: Room 9 Dialogue 9
     text: "I needed you\u2026 I thought we were family. Why did you all have to go?"
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 9
+  - name: Room 9 Dialogue 10
     text: "It\u2019s not fair. It\u2019s not fair! This can\u2019t be it."
     safeZoneID: 9
     duration: 5
-  - name: Room 9 Dialogue 10
+  - name: Room 9 Dialogue 11
     text: Is this really the punishment I deserved? To be alone forever... with my
       thoughts?
     safeZoneID: 9
     duration: 5
   intrusiveThoughtsBank:
-  - "You\u2019re so precious when you smile"
-  - I know you
-  - "I\u2019ve seen what you are"
-  - What a terrible night to exist
-  - Existence is futile
-  - Running is pointless
-  - Wrong way, sweetheart
+  - "You\u2019re so precious when you smile."
+  - I know you.
+  - "I\u2019ve seen what you are."
+  - What a terrible night to exist.
+  - Existence is futile.
+  - Running is pointless.
   - "What\u2019s that sound?"
   - "What\u2019s wrong with your brain?"
   - Are you crying?
@@ -2451,6 +2449,7 @@ MonoBehaviour:
   - You are rotting away
   - "You can\u2019t even look at yourself, can you?"
   - A soulless being in a lifeless body
+  - Wrong way, sweetheart.
 --- !u!4 &458789166
 Transform:
   m_ObjectHideFlags: 0

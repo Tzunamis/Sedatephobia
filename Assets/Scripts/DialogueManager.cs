@@ -58,6 +58,7 @@ public class DialogueManager : MonoBehaviour
     int eyeballDelay;
     float intrusiveThoughtsDelay;
     float intrusiveThoughtsDelayModifier;
+    int minimumIntrusiveThoughtsDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -95,8 +96,9 @@ public class DialogueManager : MonoBehaviour
         breathingDelay = 40;
         fastBreathingDelay = 60;
         eyeballDelay = 65;
-        intrusiveThoughtsDelay = 80;
+        intrusiveThoughtsDelay = 1000;
         intrusiveThoughtsDelayModifier = 1.5f;
+        minimumIntrusiveThoughtsDelay = 20;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -105,8 +107,6 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(safeZoneID);
-
         if (isSafe)
         {
             //FADE OUT DARKNESS SOUNDS
@@ -192,8 +192,10 @@ public class DialogueManager : MonoBehaviour
                 // Manage intrusive thoughts timer
                 intrusiveThoughtsTimer = 0;
                 intrusiveThoughtsDelay -= intrusiveThoughtsDelayModifier;
-                if (intrusiveThoughtsDelay < 2)
-                    intrusiveThoughtsDelay = 2;
+                if (intrusiveThoughtsDelay < minimumIntrusiveThoughtsDelay)
+                    intrusiveThoughtsDelay = minimumIntrusiveThoughtsDelay;
+                Debug.Log("intrusive cooldown: " + intrusiveThoughtsDelay);
+                Debug.Log("modifier" + intrusiveThoughtsDelayModifier);
             }
 
         }
@@ -317,7 +319,7 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
 
         // Check if dialogue triggers safezone "destruction"
-        int[] darknessTriggers = new int[] {1, 15, 25, 35, 45};
+        int[] darknessTriggers = new int[] {1, 19, 30, 37, 48, 54, 62, 69, 77};
         for(int i = 0; i < darknessTriggers.Length; i++)
         {
             if (currentNarrativeDialogueID == darknessTriggers[i])
@@ -345,7 +347,7 @@ public class DialogueManager : MonoBehaviour
         {
             lastNarrativeLine = false;
             StartCoroutine(FadeText(bottomText, false));
-            Invoke("ClearPreviousText", currentNarrativeDialogue.duration);
+            ClearPreviousText();
             return;
         }
         // Change text to current line
@@ -391,6 +393,9 @@ public class DialogueManager : MonoBehaviour
             // Intrusive thoughts delay reduced in each zone
             intrusiveThoughtsDelay = 20 - safeZoneID;
             intrusiveThoughtsDelayModifier = 1.5f + safeZoneID * 0.2f;
+            minimumIntrusiveThoughtsDelay = 20 - safeZoneID * 2;
+            if (minimumIntrusiveThoughtsDelay < 2)
+                minimumIntrusiveThoughtsDelay = 2;
         }
                
     }
