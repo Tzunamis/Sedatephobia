@@ -75,7 +75,6 @@ public class AudioManager : MonoBehaviour
 
         if (fadeIn)
         {
-            Debug.Log("Fade in wind");
             s.source.volume = 0;
             
             while (s.source.volume < s.maxVolume)

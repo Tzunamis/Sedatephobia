@@ -40,7 +40,7 @@ public class SafeZoneTrigger : MonoBehaviour
                 StaticSave.InRoom++;
                 // DIALOGUE
                 Debug.Log("Entered Room" + StaticSave.InRoom);
-                dialogueManager.EnterSafeZone(StaticSave.InRoom);
+                dialogueManager.EnterSafeZone(StaticSave.InRoom - 1);
             }
 
         }

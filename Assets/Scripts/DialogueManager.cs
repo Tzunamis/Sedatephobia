@@ -105,6 +105,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(safeZoneID);
 
         if (isSafe)
         {
@@ -302,11 +303,18 @@ public class DialogueManager : MonoBehaviour
 
     void DisplayNarrativeDialogue()
     {
-        while(currentNarrativeDialogue.safeZoneID != safeZoneID)
+        while(currentNarrativeDialogue.safeZoneID < safeZoneID)
         {
+            //Debug.Log("current dialogue: " + narrativeDialogueBank[currentNarrativeDialogueID].text);
+            //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
+            //Debug.Log("safezoneID in dialogue array: " + currentNarrativeDialogue.safeZoneID);
+            //Debug.Log("safezoneID in dialogue manager: " + safeZoneID);
+
             currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID + 1];
             currentNarrativeDialogueID++;
         }
+        //Debug.Log("current dialogue: " + narrativeDialogueBank[currentNarrativeDialogueID].text);
+        //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
 
         // Check if dialogue triggers safezone "destruction"
         int[] darknessTriggers = new int[] {1, 15, 25, 35, 45};
@@ -316,7 +324,8 @@ public class DialogueManager : MonoBehaviour
             {
                 // Trigger darkness
                 ExitSafeZone();
-                GameObject.Find("Room" + currentNarrativeDialogueID + "Spot").GetComponent<Light>().enabled = false;
+                Debug.Log("currentsafezone: " + currentNarrativeDialogue.safeZoneID);
+                GameObject.Find("Room" + currentNarrativeDialogue.safeZoneID + "Spot").GetComponent<Light>().enabled = false;
                 audioManager.Play("LightsOut");
             }
 
@@ -330,7 +339,7 @@ public class DialogueManager : MonoBehaviour
 
         }
         
-
+        //FIX THIS
         // If last line was just displayed, fade out and stop displaying dialogue
         if(lastNarrativeLine)
         {
