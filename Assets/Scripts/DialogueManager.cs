@@ -47,12 +47,17 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector]
     int safeZoneID = 1; // Tracks which location the player is in (or last visited)
     float darknessTimer = 0; // Tracks time since player entered darkness
+    float intrusiveThoughtsTimer = 0; // Tracks time since last intrusive thought
 
     // AUDIO
     AudioManager audioManager;
     int windDelay;
     int heartbeatDelay;
     int breathingDelay;
+    int fastBreathingDelay;
+    int eyeballDelay;
+    float intrusiveThoughtsDelay;
+    float intrusiveThoughtsDelayModifier;
 
     // Start is called before the first frame update
     void Start()
@@ -84,10 +89,14 @@ public class DialogueManager : MonoBehaviour
         // Display title
         Invoke("DisplayTitleCard", 5);
 
-        // Set initial sound delay values
+        // Set initial darkness trigger delay values
         windDelay = 0;
-        heartbeatDelay = 20;
+        heartbeatDelay = 0;
         breathingDelay = 40;
+        fastBreathingDelay = 60;
+        eyeballDelay = 65;
+        intrusiveThoughtsDelay = 80;
+        intrusiveThoughtsDelayModifier = 1.5f;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -96,11 +105,6 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // For testing purposes
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            DisplayIntrusiveThought();
-        }
 
         if (isSafe)
         {
@@ -134,9 +138,10 @@ public class DialogueManager : MonoBehaviour
 
         else
         {
+            // Increment timers
             darknessTimer += Time.deltaTime;
+            intrusiveThoughtsTimer += Time.deltaTime;
             // Manage darkness audio
-
             if (darknessTimer > windDelay)
             {
                 if (!audioManager.sounds[2].source.isPlaying)
@@ -150,8 +155,7 @@ public class DialogueManager : MonoBehaviour
                     audioManager.FadeTheSound("Wind2", true);
                 }
             }
-            
-            if(darknessTimer > breathingDelay)
+            if(darknessTimer > heartbeatDelay)
             {
                 if (!audioManager.sounds[5].source.isPlaying)
                 {
@@ -159,13 +163,36 @@ public class DialogueManager : MonoBehaviour
                     audioManager.FadeTheSound("Heartbeat", true);
                 }
             }
-            if(darknessTimer > heartbeatDelay)
+            if(darknessTimer > breathingDelay)
             {
                 if (!audioManager.sounds[6].source.isPlaying)
                 {
                     audioManager.Play("Breathing");
                     audioManager.FadeTheSound("Breathing", true);
+                    audioManager.sounds[6].source.pitch = 0.9f;
                 }
+            }
+            
+            if(darknessTimer > fastBreathingDelay)
+            {
+                if(audioManager.sounds[6].source.isPlaying)
+                {
+                    audioManager.sounds[6].source.pitch = 1;
+                }
+            }
+
+            // Eyeball stuff
+
+            
+            if(intrusiveThoughtsTimer > intrusiveThoughtsDelay)
+            {
+                // Generate intrusive thoughts
+                DisplayIntrusiveThought();
+                // Manage intrusive thoughts timer
+                intrusiveThoughtsTimer = 0;
+                intrusiveThoughtsDelay -= intrusiveThoughtsDelayModifier;
+                if (intrusiveThoughtsDelay < 2)
+                    intrusiveThoughtsDelay = 2;
             }
 
         }
@@ -275,10 +302,14 @@ public class DialogueManager : MonoBehaviour
 
     void DisplayNarrativeDialogue()
     {
-        
+        while(currentNarrativeDialogue.safeZoneID != safeZoneID)
+        {
+            currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID + 1];
+            currentNarrativeDialogueID++;
+        }
+
         // Check if dialogue triggers safezone "destruction"
-        
-        int[] darknessTriggers = new int[] {1, 10, 15, 20, 25};
+        int[] darknessTriggers = new int[] {1, 15, 25, 35, 45};
         for(int i = 0; i < darknessTriggers.Length; i++)
         {
             if (currentNarrativeDialogueID == darknessTriggers[i])
@@ -286,14 +317,17 @@ public class DialogueManager : MonoBehaviour
                 // Trigger darkness
                 ExitSafeZone();
                 GameObject.Find("Room" + currentNarrativeDialogueID + "Spot").GetComponent<Light>().enabled = false;
-                
+                audioManager.Play("LightsOut");
             }
 
+            // Initial darkness
             if(currentNarrativeDialogueID == 1)
             {
                 GameObject.Find("Camera").GetComponent<AudioSource>().Stop();
                 titleText.text = "";
             }
+
+
         }
         
 
@@ -345,6 +379,9 @@ public class DialogueManager : MonoBehaviour
             // Trigger first dialogue of area
             firstNarrativeLine = true;
             DisplayNarrativeDialogue();
+            // Intrusive thoughts delay reduced in each zone
+            intrusiveThoughtsDelay = 20 - safeZoneID;
+            intrusiveThoughtsDelayModifier = 1.5f + safeZoneID * 0.2f;
         }
                
     }
@@ -352,6 +389,7 @@ public class DialogueManager : MonoBehaviour
     void ExitSafeZone()
     {
         darknessTimer = 0; // Reset timer
+        intrusiveThoughtsTimer = 0;
         isSafe = false;
         //Reduce darkness sound cooldowns
         heartbeatDelay -= 2;

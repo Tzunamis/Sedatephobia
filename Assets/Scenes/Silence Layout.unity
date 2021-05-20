@@ -7005,6 +7005,16 @@ MonoBehaviour:
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: LightsOut
+    clip: {fileID: 8300000, guid: b5d92f20989df3a4691eb023b1951d41, type: 3}
+    volume: 1
+    volumeVariance: 0
+    maxVolume: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &1416957520
 Transform:
   m_ObjectHideFlags: 0

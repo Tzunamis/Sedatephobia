@@ -6,12 +6,14 @@ public class SafeZoneTrigger : MonoBehaviour
 {
     CapsuleCollider triggerZone;
     AudioSource sound;
+    DialogueManager dialogueManager;
     bool playerHasEntered = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if(gameObject.GetComponent<CapsuleCollider>() != null)
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+        if (gameObject.GetComponent<CapsuleCollider>() != null)
             triggerZone = gameObject.GetComponent<CapsuleCollider>();
         if (gameObject.GetComponent<AudioSource>() != null)
             sound = gameObject.GetComponent<AudioSource>();
@@ -37,7 +39,6 @@ public class SafeZoneTrigger : MonoBehaviour
                 playerHasEntered = true;
                 StaticSave.InRoom++;
                 // DIALOGUE
-                DialogueManager dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
                 Debug.Log("Entered Room" + StaticSave.InRoom);
                 dialogueManager.EnterSafeZone(StaticSave.InRoom);
             }
