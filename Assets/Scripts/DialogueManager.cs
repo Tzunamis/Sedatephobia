@@ -6,6 +6,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    // This script manages more than just dialogue, heh. A little messy.
+
     // TEXT BOXES
     TextMeshProUGUI bottomText;
     TextMeshProUGUI topLeftText;
@@ -20,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     // DIALOGUE
 
     Dialogue currentNarrativeDialogue; // Current narrative dialogue
+    bool playingNarrativeDialogue = true;
     int currentNarrativeDialogueID;
     bool firstNarrativeLine = true;
     bool lastNarrativeLine = false;
@@ -114,7 +117,6 @@ public class DialogueManager : MonoBehaviour
             // Wind 1
             if (audioManager.sounds[2].source.isPlaying)
             {
-                Debug.Log("Fadeout wind");
                 audioManager.FadeTheSound("Wind1", false);
             }
 
@@ -194,8 +196,6 @@ public class DialogueManager : MonoBehaviour
                 intrusiveThoughtsDelay -= intrusiveThoughtsDelayModifier;
                 if (intrusiveThoughtsDelay < minimumIntrusiveThoughtsDelay)
                     intrusiveThoughtsDelay = minimumIntrusiveThoughtsDelay;
-                Debug.Log("intrusive cooldown: " + intrusiveThoughtsDelay);
-                Debug.Log("modifier" + intrusiveThoughtsDelayModifier);
             }
 
         }
@@ -233,17 +233,19 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
 
+        // Check if intrusive thoughts list needs refreshing
+        if (intrusiveThoughts.Count == 0)
+        {
+            RefreshIntrusiveThoughts();
+        }
+
         // Randomize dialogue
         int dialogueIndex = Random.Range(1, intrusiveThoughts.Count + 1);
         currentIntrusiveDialogue = (string)intrusiveThoughts[dialogueIndex - 1];
         // Remove selected dialogue
         intrusiveThoughts.RemoveAt(dialogueIndex - 1);
 
-        // Check if intrusive thoughts list needs refreshing
-        if (intrusiveThoughts.Count == 0)
-        {
-            RefreshIntrusiveThoughts();
-        }
+        
         // Display dialogue
         RandomizeTextPosition(currentTextBox, dialogueLocation);
         DisplayIntrusiveDialogue(currentTextBox, currentIntrusiveDialogue, 3, true);
@@ -311,6 +313,7 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
             //Debug.Log("safezoneID in dialogue array: " + currentNarrativeDialogue.safeZoneID);
             //Debug.Log("safezoneID in dialogue manager: " + safeZoneID);
+            Debug.Log("skipping dialogue");
 
             currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID + 1];
             currentNarrativeDialogueID++;
@@ -341,20 +344,23 @@ public class DialogueManager : MonoBehaviour
 
         }
         
-        //FIX THIS
         // If last line was just displayed, fade out and stop displaying dialogue
         if(lastNarrativeLine)
         {
             lastNarrativeLine = false;
+            playingNarrativeDialogue = false;
             StartCoroutine(FadeText(bottomText, false));
             ClearPreviousText();
+            Debug.Log("last line");
             return;
         }
+        Debug.Log("not last line");
         // Change text to current line
         bottomText.text = currentNarrativeDialogue.text;
         if(firstNarrativeLine && currentNarrativeDialogueID != 0)
         {
             StartCoroutine(FadeText(bottomText, true));
+            StartCoroutine(FadeText(previousText, true));
             firstNarrativeLine = false;
         }
         else if (currentNarrativeDialogueID != 0)
@@ -372,6 +378,8 @@ public class DialogueManager : MonoBehaviour
             
         }
 
+        Debug.Log("duration: " + narrativeDialogueBank[currentNarrativeDialogueID - 1].duration);
+
         // Invoke this function after dialogue duration
         Invoke("DisplayNarrativeDialogue", narrativeDialogueBank[currentNarrativeDialogueID - 1].duration);
     }
@@ -387,15 +395,21 @@ public class DialogueManager : MonoBehaviour
         {
             isSafe = true; // Player is safe
             safeZoneID = safeZone; // Set new safezone
-            // Trigger first dialogue of area
-            firstNarrativeLine = true;
-            DisplayNarrativeDialogue();
             // Intrusive thoughts delay reduced in each zone
             intrusiveThoughtsDelay = 20 - safeZoneID;
             intrusiveThoughtsDelayModifier = 1.5f + safeZoneID * 0.2f;
             minimumIntrusiveThoughtsDelay = 20 - safeZoneID * 2;
             if (minimumIntrusiveThoughtsDelay < 2)
                 minimumIntrusiveThoughtsDelay = 2;
+
+            // Trigger first dialogue of area
+            if(!playingNarrativeDialogue)
+            {
+                firstNarrativeLine = true;
+                playingNarrativeDialogue = true;
+                DisplayNarrativeDialogue();
+            }
+            
         }
                
     }

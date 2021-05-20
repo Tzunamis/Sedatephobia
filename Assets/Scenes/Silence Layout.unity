@@ -2076,7 +2076,7 @@ MonoBehaviour:
     safeZoneID: 2
     duration: 5
   - name: Room 2 Dialogue 6
-    text: "I wonder if it still works\u2026"
+    text: ..
     safeZoneID: 2
     duration: 5
   - name: Room 2 Dialogue 7
