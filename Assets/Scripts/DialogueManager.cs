@@ -420,7 +420,7 @@ public class DialogueManager : MonoBehaviour
 
             safezoneSound = objectSound;
 
-            // KILL EYEBALL
+            // HIDE EYEBALL
             
         }
                
