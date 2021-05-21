@@ -24,7 +24,7 @@ public class MovementEngine : MonoBehaviour
         Cursor.visible = false;
         Camera = GameObject.Find("Camera");
         Controller = GetComponent<CharacterController>();
-        Invoke("MakeControllable", 1); // The editor is a bit buggy on startup with mouse controls, this shouldn't be needed in a build.
+        Invoke("MakeControllable", 10); // The editor is a bit buggy on startup with mouse controls, this shouldn't be needed in a build.
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
     void FixedUpdate()
