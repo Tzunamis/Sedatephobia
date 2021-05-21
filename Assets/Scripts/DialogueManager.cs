@@ -62,6 +62,7 @@ public class DialogueManager : MonoBehaviour
     float intrusiveThoughtsDelay;
     float intrusiveThoughtsDelayModifier;
     int minimumIntrusiveThoughtsDelay;
+    AudioSource safezoneSound;
 
     // Start is called before the first frame update
     void Start()
@@ -95,13 +96,13 @@ public class DialogueManager : MonoBehaviour
 
         // Set initial darkness trigger delay values
         windDelay = 0;
-        heartbeatDelay = 20;
-        breathingDelay = 0;
-        fastBreathingDelay = 10;
-        eyeballDelay = 65;
-        intrusiveThoughtsDelay = 2;
+        heartbeatDelay = 30;
+        breathingDelay = 50;
+        fastBreathingDelay = 70;
+        eyeballDelay = 100;
+        intrusiveThoughtsDelay = 1000;
         intrusiveThoughtsDelayModifier = 1.5f;
-        minimumIntrusiveThoughtsDelay = 2;
+        minimumIntrusiveThoughtsDelay = 20;
 
         // Start room 1 dialogue
         DisplayNarrativeDialogue();
@@ -337,7 +338,7 @@ public class DialogueManager : MonoBehaviour
             if (currentNarrativeDialogueID == darknessTriggers[i])
             {
                 // Trigger darkness
-                ExitSafeZone();
+                ExitSafeZone(safezoneSound);
                 Debug.Log("currentsafezone: " + currentNarrativeDialogue.safeZoneID);
                 GameObject.Find("Room" + currentNarrativeDialogue.safeZoneID + "Spot").GetComponent<Light>().enabled = false;
                 audioManager.Play("LightsOut");
@@ -396,7 +397,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(FadeText(previousText, false));
     }
 
-    public void EnterSafeZone(int safeZone)
+    public void EnterSafeZone(int safeZone, AudioSource objectSound)
     {
         if(safeZone != safeZoneID) // If the player has entered a new safe zone
         {
@@ -416,12 +417,16 @@ public class DialogueManager : MonoBehaviour
                 playingNarrativeDialogue = true;
                 DisplayNarrativeDialogue();
             }
+
+            safezoneSound = objectSound;
+
+            // KILL EYEBALL
             
         }
                
     }
 
-    void ExitSafeZone()
+    void ExitSafeZone(AudioSource objectSound)
     {
         darknessTimer = 0; // Reset timer
         intrusiveThoughtsTimer = 0;
@@ -429,6 +434,10 @@ public class DialogueManager : MonoBehaviour
         //Reduce darkness sound cooldowns
         heartbeatDelay -= 2;
         breathingDelay -= 4;
+        fastBreathingDelay -= 4;
+        eyeballDelay -= 4;
+        if(safezoneSound != null)
+            safezoneSound.Stop();
     }
 
     IEnumerator FadeText(TextMeshProUGUI textBox, bool fadeIn)

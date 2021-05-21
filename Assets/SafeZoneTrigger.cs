@@ -35,12 +35,11 @@ public class SafeZoneTrigger : MonoBehaviour
 
             if(!playerHasEntered)
             {
-                // GAME STATE
+                // Game state
                 playerHasEntered = true;
                 StaticSave.InRoom++;
-                // DIALOGUE
-                Debug.Log("Entered Room" + StaticSave.InRoom);
-                dialogueManager.EnterSafeZone(StaticSave.InRoom - 1);
+                // Dialogue
+                dialogueManager.EnterSafeZone(StaticSave.InRoom - 1, sound);
             }
 
         }
