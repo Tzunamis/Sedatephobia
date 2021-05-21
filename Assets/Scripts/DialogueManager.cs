@@ -7,7 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     // This script manages more than just dialogue, heh. A little messy.
-
+    public GameObject EyeBall;
     // TEXT BOXES
     TextMeshProUGUI bottomText;
     TextMeshProUGUI topLeftText;
@@ -189,7 +189,7 @@ public class DialogueManager : MonoBehaviour
             // EYEBALL STUFF
             if(darknessTimer > eyeballDelay)
             {
-                // SPAWN EYEBALL
+                EyeBall.SetActive(true);
             }
 
             // Intrusive thought stuff
@@ -420,8 +420,8 @@ public class DialogueManager : MonoBehaviour
 
             safezoneSound = objectSound;
 
-            // HIDE EYEBALL
-            
+            EyeBall.SetActive(false);
+
         }
                
     }
