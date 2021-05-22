@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Silence Layout.unity
+    guid: d4d9e3e7cdc3c6f4781019ad232cb0a9
   m_configObjects: {}
