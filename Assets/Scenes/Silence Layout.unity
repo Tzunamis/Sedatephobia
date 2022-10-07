@@ -2005,7 +2005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5835e33d5cbda6e438373f269af5cf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EyeBall: {fileID: 2127140939}
   narrativeDialogueBank:
   - name: Room1Walkman
     text: 
@@ -2447,6 +2446,7 @@ MonoBehaviour:
   - "You can\u2019t even look at yourself, can you?"
   - A soulless being in a lifeless body.
   - Wrong way, sweetheart.
+  EyeBall: {fileID: 2127140939}
 --- !u!4 &458789166
 Transform:
   m_ObjectHideFlags: 0
@@ -6981,7 +6981,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Breathing
     clip: {fileID: 8300000, guid: f6276191a88449d459566ae87bdc288f, type: 3}
-    volume: 1
+    volume: 0.3
     volumeVariance: 0
     maxVolume: 0
     pitch: 1

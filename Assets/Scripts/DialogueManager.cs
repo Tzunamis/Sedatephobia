@@ -6,8 +6,6 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    // This script manages more than just dialogue, heh. A little messy.
-    public GameObject EyeBall;
     // TEXT BOXES
     TextMeshProUGUI bottomText;
     TextMeshProUGUI topLeftText;
@@ -25,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     bool playingNarrativeDialogue = true;
     int currentNarrativeDialogueID;
     bool firstNarrativeLine = true;
+    bool secondNarrativeLine = false;
     bool lastNarrativeLine = false;
     string currentIntrusiveDialogue; // Intrusive dialogue to be printed
     int dialogueLocation; // Location of intrusive thought
@@ -51,6 +50,7 @@ public class DialogueManager : MonoBehaviour
     int safeZoneID = 1; // Tracks which location the player is in (or last visited)
     float darknessTimer = 0; // Tracks time since player entered darkness
     float intrusiveThoughtsTimer = 0; // Tracks time since last intrusive thought
+    public GameObject EyeBall; // Summon the eyeball monster
 
     // AUDIO
     AudioManager audioManager;
@@ -63,8 +63,7 @@ public class DialogueManager : MonoBehaviour
     float intrusiveThoughtsDelayModifier;
     int minimumIntrusiveThoughtsDelay;
     AudioSource safezoneSound;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         // Assign variables
@@ -173,10 +172,13 @@ public class DialogueManager : MonoBehaviour
                 {
                     audioManager.Play("Breathing");
                     audioManager.FadeTheSound("Breathing", true);
-                    if(darknessTimer < fastBreathingDelay)
-                        audioManager.sounds[6].source.pitch = 0.9f;
+                    audioManager.sounds[6].source.pitch = 0.9f;
                 }
             }
+            //if(darknessTimer > fastBreathingDelay)
+            //{
+            //    audioManager.sounds[6].source.pitch = 0.9f;
+            //}
             
             if(darknessTimer > fastBreathingDelay)
             {
@@ -319,17 +321,9 @@ public class DialogueManager : MonoBehaviour
     {
         while(currentNarrativeDialogue.safeZoneID < safeZoneID)
         {
-            //Debug.Log("current dialogue: " + narrativeDialogueBank[currentNarrativeDialogueID].text);
-            //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
-            //Debug.Log("safezoneID in dialogue array: " + currentNarrativeDialogue.safeZoneID);
-            //Debug.Log("safezoneID in dialogue manager: " + safeZoneID);
-            Debug.Log("skipping dialogue");
-
             currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID + 1];
             currentNarrativeDialogueID++;
         }
-        //Debug.Log("current dialogue: " + narrativeDialogueBank[currentNarrativeDialogueID].text);
-        //Debug.Log("current dialogue ID: " + currentNarrativeDialogueID);
 
         // Check if dialogue triggers safezone "destruction"
         int[] darknessTriggers = new int[] {1, 19, 30, 37, 48, 54, 62, 69, 77};
@@ -339,7 +333,6 @@ public class DialogueManager : MonoBehaviour
             {
                 // Trigger darkness
                 ExitSafeZone(safezoneSound);
-                Debug.Log("currentsafezone: " + currentNarrativeDialogue.safeZoneID);
                 GameObject.Find("Room" + currentNarrativeDialogue.safeZoneID + "Spot").GetComponent<Light>().enabled = false;
                 audioManager.Play("LightsOut");
             }
@@ -365,16 +358,22 @@ public class DialogueManager : MonoBehaviour
         }
         // Change text to current line
         bottomText.text = currentNarrativeDialogue.text;
-        if(firstNarrativeLine && currentNarrativeDialogueID != 0)
+        if (secondNarrativeLine)
+        {
+            previousText.alpha = 1;
+            secondNarrativeLine = false;
+        }
+        if (firstNarrativeLine && currentNarrativeDialogueID != 0)
         {
             StartCoroutine(FadeText(bottomText, true));
-            StartCoroutine(FadeText(previousText, true));
             firstNarrativeLine = false;
+            secondNarrativeLine = true;
         }
         else if (currentNarrativeDialogueID != 0)
         {
             previousText.text = narrativeDialogueBank[currentNarrativeDialogueID - 1].text;
         }
+        
         // Change to next line
         currentNarrativeDialogueID++;
         currentNarrativeDialogue = narrativeDialogueBank[currentNarrativeDialogueID];
@@ -385,8 +384,6 @@ public class DialogueManager : MonoBehaviour
             lastNarrativeLine = true;
             
         }
-
-        Debug.Log("duration: " + narrativeDialogueBank[currentNarrativeDialogueID - 1].duration);
 
         // Invoke this function after dialogue duration
         Invoke("DisplayNarrativeDialogue", narrativeDialogueBank[currentNarrativeDialogueID - 1].duration);
@@ -403,7 +400,7 @@ public class DialogueManager : MonoBehaviour
         {
             isSafe = true; // Player is safe
             safeZoneID = safeZone; // Set new safezone
-            // Intrusive thoughts delay reduced in each zone
+            // Intrusive thoughts delay reduced in each zone (they will appear more quickly as you progress through the game)
             intrusiveThoughtsDelay = 20 - safeZoneID;
             intrusiveThoughtsDelayModifier = 1.5f + safeZoneID * 0.2f;
             minimumIntrusiveThoughtsDelay = 20 - safeZoneID * 2;

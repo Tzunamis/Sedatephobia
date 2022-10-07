@@ -57,7 +57,19 @@ public class AudioManager : MonoBehaviour
 		s.source.Play();
 	}
 
-    public void FadeTheSound(string sound, bool fadeIn)
+	public void Stop(string sound)
+	{
+		Sound s = Array.Find(sounds, item => item.name == sound);
+		if (s == null)
+		{
+			Debug.LogWarning("Sound: " + name + " not found!");
+			return;
+		}
+
+		s.source.Stop();
+	}
+
+	public void FadeTheSound(string sound, bool fadeIn)
     {
         StartCoroutine(FadeSound(sound, fadeIn));
     }
@@ -79,18 +91,20 @@ public class AudioManager : MonoBehaviour
             
             while (s.source.volume < s.maxVolume)
             {
-                s.source.volume += (0.01f);
-                yield return null;
-            }
-            
-        }
+                s.source.volume += (Time.fixedDeltaTime / fadeTime);
+				yield return new WaitForFixedUpdate();
+			}
+			yield return null;
+		}
         else
         {
             while (s.source.volume > 0)
             {
-                s.source.volume -= (Time.deltaTime / fadeTime);
-                yield return null;
+                s.source.volume -= (Time.fixedDeltaTime / fadeTime);
+				yield return new WaitForFixedUpdate();
             }
-        }
+			s.source.Stop();
+			yield return null;
+		}
     }
 }
